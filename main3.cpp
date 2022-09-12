@@ -1,46 +1,28 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include "task3.h"
 #include <stdio.h>
-#include <conio.h>
 
-char getText(int n) {
-	
 
-	
-}
+//Write a program that translate user input
+//integer to string using recursion and without
+//any library conversion functions
 
+#define N 11
 
 int main() {
-	//int i = 0;
-	int number = 0;
-	int count = 0;
-	int buf[10] = {};
-	char chTmp;
 
-	printf("Enter number:");
-	scanf("%d", &number);
+	int num = 0;
+	char buf[N];
 	
-	int tmp = number;
+	printf("Enter number: ");
+	scanf("%d", &num);
 
-	for (int i = 9; tmp > 0; i--) {
-		
-		int g;
-		g = tmp % 10;
-		if (g > 0) {
-			buf[i] = g;
-			count++;
-		}		
-		//printf(" %d ", buf[i]);
-		tmp /= 10;		
+	int2str(buf, num);
+
+	printf("\n");
+	for (int i = 0; buf[i] != '\0'; i++) {
+		printf("%c", buf[i]);
 	}
-	
-	//while (tmp > 0) {
-	//	tmp /= 10;
-	//	count++;
-	//}
 
-	printf("\ncount = %d", count);
-	
-
-	_getch();
 	return 0;
 }
