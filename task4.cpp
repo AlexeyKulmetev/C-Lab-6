@@ -2,18 +2,21 @@
 
 long long sumC(char* arr, int len) {
 
-	short num;
 	long long sum = 0;
 
 	for (int i = 0; i < len; i++) {
-		num = arr[i] - 48;
-		sum += num;
+		sum += arr[i] - 48;
 	}
 	return sum;
 }
 
+
 long long sumR(char* arr, int len) {
 
-
-
+	if (len == 1) {
+		return *arr - 48;
+	}
+	else {
+		return (* arr - 48) + sumR(arr + 1, len - 1);
+	}		
 }
