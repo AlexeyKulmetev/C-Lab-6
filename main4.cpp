@@ -1,10 +1,10 @@
+#pragma comment(linker, "/STACK:128000000")
 #define _CRT_SECURE_NO_WARNINGS
 #include "task4.h"
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-
 
 
 int main() {
@@ -27,7 +27,6 @@ int main() {
 	srand(time(NULL));
 	for (int i = 0; i < len; i++) {
 		arr[i] = rand() % (57 - 48 + 1) + 48;
-		printf(" %c ", arr[i]);
 	}
 
 	printf("\n");
@@ -35,12 +34,24 @@ int main() {
 	clock_t begin = clock();
 	sum_c = sumC(arr, len);
 	clock_t end = clock();
-	time_spent_c += (double)(end - begin);
+	time_spent_c += (double)(end - begin) / CLOCKS_PER_SEC;
 
-	printf("sum cycle: %d\ttime cycle = %.16f", sum_c, time_spent_c);
+	begin = clock();
+	sum_r = sumR(arr, len);
+	end = clock();
+	time_spent_r += (double)(end - begin) / CLOCKS_PER_SEC;
 
-	printf("\n\n");
-	printf("sum recursion: %d", sumR(arr, len));
+	if (time_spent_r > time_spent_c)
+		printf("Recursion time is longer than loop time\n\nRecursion time\t= %.17f\nLoop time\t= %.17f",
+			time_spent_r, time_spent_c);
+	else if (time_spent_c > time_spent_r)
+		printf("Loop time is longer than recursion time\n\nLoop time\t= %.17f\nRecursion time\t= %.17f",
+			time_spent_c, time_spent_r);
+	else
+		printf("Recursion time is equal to loop time\n\nRecursion time\t=%.17f\nLoop time\t = %.17f", 
+			time_spent_r, time_spent_c);
+	
+	return 0;
 }
 
 
