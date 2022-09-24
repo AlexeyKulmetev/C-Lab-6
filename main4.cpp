@@ -1,4 +1,4 @@
-#pragma comment(linker, "/STACK:128000000")
+#pragma comment(linker, "/STACK:256000000")
 #define _CRT_SECURE_NO_WARNINGS
 #include "task4.h"
 #include <stdio.h>
@@ -41,21 +41,24 @@ int main() {
 	end = clock();
 	time_spent_r += (double)(end - begin) / CLOCKS_PER_SEC;
 
+	printf("\nThe amount calculated by the cyclic method: %lld", sum_c);
+	printf("\nThe amount calculated by the recursion method: %lld\n", sum_r);
+
 	if (time_spent_r > time_spent_c)
-		printf("Recursion time is longer than loop time\n\nRecursion time\t= %.17f\nLoop time\t= %.17f",
+		printf("\nRecursion time is longer than loop time\n\nRecursion time\t= %.17f\nLoop time\t= %.17f",
 			time_spent_r, time_spent_c);
 	else if (time_spent_c > time_spent_r)
-		printf("Loop time is longer than recursion time\n\nLoop time\t= %.17f\nRecursion time\t= %.17f",
+		printf("\nLoop time is longer than recursion time\n\nLoop time\t= %.17f\nRecursion time\t= %.17f",
 			time_spent_c, time_spent_r);
 	else
-		printf("Recursion time is equal to loop time\n\nRecursion time\t=%.17f\nLoop time\t = %.17f", 
+		printf("\nRecursion time is equal to loop time\n\nRecursion time\t=%.17f\nLoop time\t = %.17f",
 			time_spent_r, time_spent_c);
-	
+
+	free(arr);
 	return 0;
 }
 
 
-
-
 // Write a program that sums an array in the traditional (cyclic)
-// and recursive ways
+// and recursive ways, also compares time of summation in
+// traditional (cyclic) and recursive ways
